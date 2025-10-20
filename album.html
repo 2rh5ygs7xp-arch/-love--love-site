@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的点滴相册</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #fef9f7;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            padding: 30px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header-title {
+            color: #457b9d;
+            font-size: 26px;
+            font-weight: normal;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .back-btn:hover {
+            color: #e63946;
+        }
+        .album-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .photo-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        .photo-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* 保持图片比例，填充容器 */
+        }
+        .photo-desc {
+            padding: 12px;
+            text-align: center;
+            color: #333;
+            font-size: 14px;
+            background: white;
+        }
+        /* 照片预览弹窗（点击照片放大） */
+        .photo-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            padding: 20px;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 80%;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2 class="header-title">我们的甜蜜瞬间</h2>
+        <a href=" " class="back-btn">← 返回首页</a >
+    </div>
+
+    <div class="album-container">
+        <!-- 照片1：自定义替换src（照片链接）和alt（照片描述） -->
+        <div class="photo-item" onclick="openModal('https://你的照片链接1.jpg', '第一次约会')">
+            < img src="https://s3.bmp.ovh/imgs/2025/10/19/4de608137b7e3b9c.jpg" alt="666665" class="photo-img">
+            <div class="photo-desc">适度</div>
+        </div>
+
+        <!-- 照片2：自定义替换 -->
+        <div class="photo-item" onclick="openModal('https://你的照片链接2.jpg', '一起看日出')">
+            < img src="https://你的照片链接2.jpg" alt="一起看日出" class="photo-img">
+            <div class="photo-desc">海边日出 · 一起等天亮</div>
+        </div>
+
+        <!-- 照片3：自定义替换 -->
+        <div class="photo-item" onclick="openModal('https://你的照片链接3.jpg', '周年纪念')">
+            < img src="https://你的照片链接3.jpg" alt="周年纪念" class="photo-img">
+            <div class="photo-desc">一周年 · 往后皆是你</div>
+        </div>
+
+        <!-- 照片4：自定义替换（可复制此块添加更多照片） -->
+        <div class="photo-item" onclick="openModal('https://你的照片链接4.jpg', '旅行时光')">
+            < img src="https://你的照片链接4.jpg" alt="旅行时光" class="photo-img">
+            <div class="photo-desc">一起去旅行 · 定格美好</div>
+        </div>
+    </div>
+
+    <!-- 照片预览弹窗 -->
+    <div class="photo-modal" id="photoModal">
+        <button class="close-modal" onclick="closeModal()">×</button>
+        < img src="" alt="" class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        // 打开照片预览
+        function openModal(imgSrc, imgAlt) {
+            const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalImg');
+            modal.style.display = 'flex';
+            modalImg.src = imgSrc;
+            modalImg.alt = imgAlt;
+        }
+
+        // 关闭照片预览
+        function closeModal() {
+            document.getElementById('photoModal').style.display = 'none';
+        }
+
+        // 点击弹窗外部也能关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('photoModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
